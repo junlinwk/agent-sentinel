@@ -5,6 +5,7 @@
   "scripts": {
     "dev:report": "slidev report.md --open",
     "build:report": "slidev build report.md --base ./ --out dist-report",
+    "build:pages": "slidev build report.md --base ./ --out docs",
     "export:report": "slidev export report.md"
   },
   "devDependencies": {
