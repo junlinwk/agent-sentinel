@@ -15,7 +15,7 @@ class: text-center
 
 # agent-sentinel
 
-## 在作業系統核心，即時阻斷被劫持的 AI 代理
+## 在OS kernel，即時阻斷被劫持的 AI 代理
 
 <div class="text-lg opacity-70 mt-8">
 當本機 AI 被提示詞注入、試圖偷讀系統機密 ——<br>在 kernel 擋下來
@@ -36,7 +36,7 @@ class: text-center
   <div class="p-5 rounded-xl bg-white/5 border border-white/10" v-click>
     <carbon-bot class="text-3xl text-cyan-300 mb-2" />
     <div class="font-bold text-cyan-300 mb-1">AI 開始有「手」</div>
-    <div class="text-sm opacity-75">代理被賦予 <code>read_file</code>、<code>run_shell</code> 等真實系統權限，不再只是聊天。</div>
+    <div class="text-sm opacity-75">代理被賦予 <code class="text-red-300">read_file</code>、<code class="text-red-300">run_shell</code> 等真實系統權限，不再只是聊天。</div>
   </div>
   <div class="p-5 rounded-xl bg-white/5 border border-white/10" v-click>
     <carbon-warning-alt class="text-3xl text-amber-300 mb-2" />
@@ -51,7 +51,7 @@ class: text-center
 </div>
 
 <div class="mt-8 text-lg opacity-90" v-click>
-所以我們要一道 <mark>核心級、能即時阻斷</mark>的防線。
+所以我們要一道 <mark>kernel-level、能即時阻斷</mark>的防線。
 </div>
 
 ---
@@ -108,7 +108,7 @@ class: text-center
 <div class="grid grid-cols-3 gap-5 mt-10 max-w-3xl mx-auto">
   <div class="p-5 rounded-xl bg-cyan-500/10 border border-cyan-500/40" v-click>
     <carbon-stop-sign class="text-4xl text-cyan-300 mb-2" /><div class="font-bold text-cyan-300">即時阻斷</div>
-    <div class="text-sm opacity-70 mt-1">在核心擋下越權存取</div>
+    <div class="text-sm opacity-70 mt-1">在kernel擋下越權存取</div>
   </div>
   <div class="p-5 rounded-xl bg-emerald-500/10 border border-emerald-500/40" v-click>
     <carbon-fingerprint-recognition class="text-4xl text-emerald-300 mb-2" /><div class="font-bold text-emerald-300">只擋這隻 AI</div>
@@ -124,23 +124,23 @@ class: text-center
 layout: center
 ---
 
-# 核心概念：防線要放在 AI 碰不到的地方
+# kernel概念：防線要放在 AI 碰不到的地方
 
 <div class="grid grid-cols-2 gap-6 mt-6">
   <div class="p-6 rounded-xl bg-red-500/10 border border-red-500/40" v-click>
     <div class="text-red-300 font-bold text-lg mb-2"><carbon-application class="inline-block align-[-0.125em] mr-1" />應用層（不可信）</div>
-    <div class="opacity-85">看得到 AI 的「意圖」</div>
+    <div class="opacity-85">SEE AI 的「意圖」</div>
     <div class="opacity-60 text-sm mt-2">但日誌在 AI 控制範圍內，<b>被攻陷後可竄改、可關閉</b></div>
   </div>
   <div class="p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/40" v-click>
-    <div class="text-emerald-300 font-bold text-lg mb-2"><carbon-chip class="inline-block align-[-0.125em] mr-1" />作業系統核心（可信）</div>
-    <div class="opacity-85">看得到 AI 的真實「動作」</div>
+    <div class="text-emerald-300 font-bold text-lg mb-2"><carbon-chip class="inline-block align-[-0.125em] mr-1" />OS kernel（可信）</div>
+    <div class="opacity-85">SEE AI 的真實「動作」</div>
     <div class="opacity-60 text-sm mt-2">AI <b>碰不到、關不掉、偵測不到</b> —— 這裡的判斷才算數</div>
   </div>
 </div>
 
 <div class="callout-line text-center mt-6 text-lg" v-click>
-<carbon-password class="inline-block align-[-0.125em] mr-1 text-amber-300" /><b>零信任</b>：在不可信的層收集的日誌沒有價值 ——<mark>把監控與阻斷下沉到核心</mark>。
+<carbon-password class="inline-block align-[-0.125em] mr-1 text-amber-300" /><b>零信任</b>：在不可信的層收集的日誌是沒用的 ——<mark>因此把監控與阻斷放在kernel</mark>。
 </div>
 
 ---
@@ -152,22 +152,22 @@ layout: center
 <div class="grid grid-cols-3 gap-6 mt-6 max-w-4xl mx-auto text-center">
   <div class="p-6 rounded-xl bg-cyan-500/10 border border-cyan-500/40" v-click>
     <carbon-view class="text-4xl text-cyan-300 mb-3" />
-    <div class="text-cyan-300 font-bold text-xl">看得到</div>
-    <div class="text-sm opacity-75 mt-2">核心探針（eBPF）擷取 AI 的真實檔案 / 行程行為</div>
+    <div class="text-cyan-300 font-bold text-xl">SEE</div>
+    <div class="text-sm opacity-75 mt-2">kernel探針（eBPF）擷取 AI 的真實檔案 / 行程行為</div>
   </div>
   <div class="p-6 rounded-xl bg-amber-500/10 border border-amber-500/40" v-click>
     <carbon-cognitive class="text-4xl text-amber-300 mb-3" />
-    <div class="text-amber-300 font-bold text-xl">看得懂</div>
+    <div class="text-amber-300 font-bold text-xl">UNDERSTAND</div>
     <div class="text-sm opacity-75 mt-2">關聯引擎判斷這次存取是不是「注入引發」的</div>
   </div>
   <div class="p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/40" v-click>
     <carbon-security class="text-4xl text-emerald-300 mb-3" />
-    <div class="text-emerald-300 font-bold text-xl">擋得住</div>
-    <div class="text-sm opacity-75 mt-2">BPF LSM 在核心層原子性回 <code>-EPERM</code> 拒絕</div>
+    <div class="text-emerald-300 font-bold text-xl">BLOCK</div>
+    <div class="text-sm opacity-75 mt-2">BPF LSM 在kernel <b>atomic</b>回 <code>-EPERM</code> 拒絕</div>
   </div>
 </div>
 
-<div class="text-center mt-8 opacity-60" v-click>全程在 AI 碰不到的核心空間完成</div>
+<div class="text-center mt-8 opacity-60" v-click>都在 AI 碰不到的kernel space</div>
 
 ---
 layout: center
@@ -178,9 +178,9 @@ layout: center
 ```mermaid {scale: 0.78}
 flowchart LR
   AG["AI 代理<br/>應用層"]:::a
-  AP["行為探針<br/>核心 eBPF"]:::k
+  AP["行為探針<br/>kernel eBPF"]:::k
   D["關聯引擎 daemon<br/>意圖 × 行為 → 判斷威脅"]:::d
-  LSM["BPF LSM<br/>核心阻斷 → -EPERM"]:::k
+  LSM["BPF LSM<br/>kernel阻斷 → -EPERM"]:::k
   AG -- "意圖紀錄" --> D
   AP -- "行為事件" --> D
   D -- "確認威脅 · 下黑名單" --> LSM
@@ -189,13 +189,13 @@ flowchart LR
   classDef d fill:#78350f,stroke:#fbbf24,color:#fef3c7;
 ```
 
-<div class="text-center opacity-70 mt-6">應用層記意圖、核心看動作、中間關聯判威脅、底層由核心阻斷</div>
+<div class="text-center opacity-70 mt-6">應用層記意圖、kernel看動作、中間關聯判威脅、底層由kernel阻斷</div>
 
 ---
 layout: center
 ---
 
-# 看得到 ｜ 核心行為探針
+# SEE ｜ kernel behavior probe
 
 <div class="grid grid-cols-2 gap-x-10 gap-y-3 rowgap-lg mt-8 max-w-4xl mx-auto text-sm">
   <div class="flex gap-3" v-click>
@@ -204,27 +204,27 @@ layout: center
   </div>
   <div class="flex gap-3" v-click>
     <carbon-filter class="text-2xl text-cyan-300 shrink-0" />
-    <div>每個探針先 <code>if(!is_tracked) return</code> —— <b>非代理 PID 在核心態直接丟棄</b>，負載低。</div>
+    <div>每個probe先 <code>if(!is_tracked) return</code> —— <b>非代理 PID 在kernel態直接丟棄</b>，負載低。</div>
   </div>
   <div class="flex gap-3" v-click>
     <carbon-branch class="text-2xl text-emerald-300 shrink-0" />
-    <div><b>fork 核心態傳播</b>：子行程一出生就納管 → 連 <code>run_shell</code> 開的 bash 也擋得住。</div>
+    <div><b>fork kernel態傳播</b>：子行程一出生就納管 → 連 <code>run_shell</code> 開的 bash 也BLOCK。</div>
   </div>
   <div class="flex gap-3" v-click>
     <carbon-time class="text-2xl text-emerald-300 shrink-0" />
-    <div>時戳用 <code>CLOCK_MONOTONIC</code>，與 AI 意圖<b>同一時鐘</b> → 才能做時間窗關聯。</div>
+    <div>timestamp用 <code>CLOCK_MONOTONIC</code>，與 AI 意圖<b>同一時鐘</b> → 才能做時間窗association。</div>
   </div>
 </div>
 
 <div class="callout-line text-center mt-7 text-sm" v-click>
-工程細節：<code>openat2</code> 旗標藏在 <code>struct open_how</code> 裡，要另寫探針讀（一般 <code>openat</code> 程式碼套不上）。
+Detail：<code>openat2</code> flag藏在 <code>struct open_how</code> 裡，要另寫probe讀（一般 <code>openat</code> 程式碼套不上）
 </div>
 
 ---
 layout: center
 ---
 
-# 看得懂 ｜ 三重關聯接起語義斷層
+# UNDERSTAND ｜ Triple Association 接起語義斷層
 
 ```mermaid {scale: 0.66}
 flowchart LR
@@ -239,14 +239,14 @@ flowchart LR
 
 <div class="grid grid-cols-2 gap-x-10 mt-4 max-w-4xl mx-auto text-sm">
   <div v-click>語意評分：路徑命中 <b>+0.6</b>、重疊 <b>+0.5</b>、關鍵詞 <b>+0.3</b>。三條件都成立 → 判定<b>注入越權</b>。</div>
-  <div v-click>巧思：意圖<b>晚到</b>會回掃、把 <code>SENSITIVE_ACCESS</code> 升級成 <code>INJECTION_…</code>；重複事件去重。</div>
+  <div v-click>Idea：意圖<b>晚到</b>會回掃、把 <code>SENSITIVE_ACCESS</code> 升級成 <code>INJECTION_…</code>；重複事件去重。</div>
 </div>
 
 ---
 layout: center
 ---
 
-# 擋得住 ｜ BPF LSM 在 VFS 最底層攔一道
+# BLOCK ｜ BPF LSM 在 VFS 最底層攔一道
 
 ```mermaid {scale: 0.74}
 flowchart LR
@@ -273,12 +273,12 @@ class: text-center
 
 <div class="text-sm tracking-widest opacity-50 mb-4">DEMO</div>
 
-# 攻擊如何被斬斷
+# How Attacks Are Blocked
 
 ```mermaid {scale: 0.6}
 flowchart LR
   A["注入文件"]:::n --> B["AI 決定<br/>read_file(/etc/shadow)"]:::n
-  B --> C["openat 進核心"]:::n
+  B --> C["openat 進kernel"]:::n
   C --> D["BPF LSM 比對命中"]:::r
   D --> E["回 -EPERM"]:::r
   E --> F["AI 只拿到<br/>Permission denied"]:::g
@@ -288,25 +288,25 @@ flowchart LR
 ```
 
 <div class="text-center mt-8 text-lg opacity-90" v-click>
-攻擊鏈在<mark>最後一哩</mark>被切斷 —— AI 始終拿不到 <code>/etc/shadow</code> 的內容。
+攻擊鏈在最末端被切斷 —— AI can't get <code>/etc/shadow</code> 的內容
 </div>
 
 ---
 layout: center
 ---
 
-# Demo：真實證據
+# Demo：proof log
 
 <div class="opacity-70 text-sm mb-4 text-left">實機跑出的log：</div>
 
 <div class="rounded-xl border border-white/15 bg-black/40 p-5 font-mono text-sm leading-loose max-w-4xl mx-auto">
   <div v-click>
-    <span class="opacity-50"># 核心阻斷紀錄 trace_pipe</span><br>
+    <span class="opacity-50"># kernel阻斷紀錄 trace_pipe</span><br>
     <span class="text-emerald-300">BPF LSM blocked pid 41987 sensitive ino 1182</span>
   </div>
   <div class="mt-3" v-click>
     <span class="opacity-50"># AI 收到的結果</span><br>
-    <span class="text-red-300">read_file(/etc/shadow) → Permission denied（存取在核心層級被拒）</span>
+    <span class="text-red-300">read_file(/etc/shadow) → Permission denied（存取在kernel層級被拒）</span>
   </div>
   <div class="mt-3" v-click>
     <span class="opacity-50"># 關聯引擎判決 alerts.jsonl</span><br>
@@ -315,7 +315,7 @@ layout: center
 </div>
 
 <div class="text-center mt-5 opacity-80" v-click>
-判定 <b class="text-emerald-400">PASS</b>：核心擋下存取、且已排除檔案權限干擾 → 可歸因於 BPF LSM。
+判定 <b class="text-emerald-400">PASS</b>：kernel擋下存取、且已排除檔案權限干擾 → 可歸因於 BPF LSM。
 </div>
 
 ---
@@ -327,7 +327,7 @@ layout: center
 <div class="grid grid-cols-3 gap-5 mt-4">
   <div class="p-5 rounded-xl bg-emerald-500/10 border border-emerald-500/40" v-click>
     <div class="text-emerald-300 font-bold mb-2">① 攻擊被擋住</div>
-    <div class="text-sm opacity-80">AI 讀 <code>/etc/shadow</code> 在核心被 <code>-EPERM</code> 拒絕。<div class="mt-1 text-emerald-300 font-bold">PASS <carbon-checkmark-filled class="inline-block align-[-0.125em]" /></div></div>
+    <div class="text-sm opacity-80">AI 讀 <code>/etc/shadow</code> 在kernel被 <code>-EPERM</code> 拒絕。<div class="mt-1 text-emerald-300 font-bold">PASS <carbon-checkmark-filled class="inline-block align-[-0.125em]" /></div></div>
   </div>
   <div class="p-5 rounded-xl bg-emerald-500/10 border border-emerald-500/40" v-click>
     <div class="text-emerald-300 font-bold mb-2">② 零誤報</div>
@@ -348,17 +348,17 @@ layout: center
 class: pitfalls-slide
 ---
 
-# 過程中踩過、並處理掉的坑
+# 特別處理的細節
 
-<div class="pitfalls-intro opacity-70 text-sm text-center">原型不是寫完就會動 —— 這些「靜默失效」的細節，才是真的擋得住的關鍵：</div>
+<div class="pitfalls-intro opacity-70 text-sm text-center">Handling silent failures is key :</div>
 
 <div class="pitfalls-grid grid grid-cols-2 max-w-4xl mx-auto text-sm">
-  <div class="flex gap-2" v-click><carbon-warning class="text-lg text-amber-300 shrink-0 mt-0.5" /><div><b>dev 編碼不一致</b>：glibc <code>2050</code> ≠ 核心 <code>8388610</code>，不換算就靜默放行 → 一定要 <code>(major&lt;&lt;20)|minor</code>。</div></div>
-  <div class="flex gap-2" v-click><carbon-warning class="text-lg text-amber-300 shrink-0 mt-0.5" /><div><b>子行程 race</b>：fork 後若慢一步就漏網 → 在核心態把追蹤狀態傳給子行程。</div></div>
+  <div class="flex gap-2" v-click><carbon-warning class="text-lg text-amber-300 shrink-0 mt-0.5" /><div><b>dev 編碼不一致</b>：glibc <code>2050</code> ≠ kernel <code>8388610</code>，不換算就靜默放行 → 一定要 <code>(major&lt;&lt;20)|minor</code>。</div></div>
+  <div class="flex gap-2" v-click><carbon-warning class="text-lg text-amber-300 shrink-0 mt-0.5" /><div><b>子行程 race</b>：fork 後若慢一步就漏網 → 在kernel態把追蹤狀態傳給子行程。</div></div>
   <div class="flex gap-2" v-click><carbon-warning class="text-lg text-amber-300 shrink-0 mt-0.5" /><div><b>全域阻斷會鎖死系統</b>：shadow 是 login/sudo 要讀的 → 第一行做 PID 範圍鎖定。</div></div>
   <div class="flex gap-2" v-click><carbon-warning class="text-lg text-amber-300 shrink-0 mt-0.5" /><div><b>結構 padding</b>：對齊差 4 bytes 鍵就對不上 → key 用兩個 <code>u64</code> 消除。</div></div>
-  <div class="flex gap-2" v-click><carbon-warning class="text-lg text-amber-300 shrink-0 mt-0.5" /><div><b>明文 HTTP 攔不到</b>：Ollama 走 localhost 明文 → 意圖改走 app-log。</div></div>
-  <div class="flex gap-2" v-click><carbon-warning class="text-lg text-amber-300 shrink-0 mt-0.5" /><div><b>DAC 假性成功</b>：普通使用者本就被擋 → 以 root 跑＋核對 trace_pipe 才可歸因。</div></div>
+  <div class="flex gap-2" v-click><carbon-warning class="text-lg text-amber-300 shrink-0 mt-0.5" /><div><b>意圖來源不可只靠網路攔截</b>：模型 API 格式、串流與框架差異容易漏判 → 改 agent app-log 提供可驗證的 intent。</div></div>
+  <div class="flex gap-2" v-click><carbon-warning class="text-lg text-amber-300 shrink-0 mt-0.5" /><div><b>DAC 假性成功</b>：普通使用者本就被擋 → 以 root 跑＋核對 trace_pipe 才可確認。</div></div>
 </div>
 
 ---
@@ -369,7 +369,7 @@ layout: center
 
 <div class="grid grid-cols-[1fr_1fr] gap-x-8 gap-y-3 rowgap-md mt-8 text-sm items-center max-w-4xl mx-auto">
   <div class="opacity-85">即時阻斷 AI 越權存取機密</div>
-  <div class="text-emerald-300" v-click><carbon-checkmark-filled class="inline-block align-[-0.125em] mr-1" />核心 <code>-EPERM</code> 擋下讀 <code>/etc/shadow</code></div>
+  <div class="text-emerald-300" v-click><carbon-checkmark-filled class="inline-block align-[-0.125em] mr-1" />kernel <code>-EPERM</code> 擋下讀 <code>/etc/shadow</code></div>
 
   <div class="opacity-85">只影響 AI、不誤傷系統</div>
   <div class="text-emerald-300" v-click><carbon-checkmark-filled class="inline-block align-[-0.125em] mr-1" />行程鎖定；反向對照 root 仍可讀</div>
@@ -377,55 +377,31 @@ layout: center
   <div class="opacity-85">正常任務零誤報</div>
   <div class="text-emerald-300" v-click><carbon-checkmark-filled class="inline-block align-[-0.125em] mr-1" />benign 情境 <code>命中敏感=0</code>，PASS</div>
 
-  <div class="opacity-85">可歸因的驗證</div>
-  <div class="text-emerald-300" v-click><carbon-checkmark-filled class="inline-block align-[-0.125em] mr-1" />排除 DAC ＋ <code>trace_pipe</code> 核心證據</div>
+  <div class="opacity-85">可追溯的驗證</div>
+  <div class="text-emerald-300" v-click><carbon-checkmark-filled class="inline-block align-[-0.125em] mr-1" />排除 DAC ＋ <code>trace_pipe</code> kernel-level evidence</div>
 
   <div class="opacity-85">理解「注入引發」而非單純存取</div>
   <div class="text-emerald-300" v-click><carbon-checkmark-filled class="inline-block align-[-0.125em] mr-1" />三重關聯判 <code>INJECTION_…</code>　score 0.90</div>
 
-  <div class="opacity-85">低效能開銷</div>
-  <div class="text-emerald-300" v-click><carbon-checkmark-filled class="inline-block align-[-0.125em] mr-1" />旁觀者約 +200 ns / 次開檔</div>
 </div>
 
----
-layout: center
----
-
-# 誠實的邊界
-
-<div class="grid grid-cols-3 gap-5 mt-4">
-  <div class="p-5 rounded-xl bg-white/5 border border-white/10" v-click>
-    <div class="font-bold text-amber-300 mb-2">靜態 vs 動態</div>
-    <div class="text-sm opacity-75">預載的敏感檔擋第一次就有效；全新目標是「偵測 → 後續阻斷」。</div>
-  </div>
-  <div class="p-5 rounded-xl bg-white/5 border border-white/10" v-click>
-    <div class="font-bold text-amber-300 mb-2">硬防線是核心</div>
-    <div class="text-sm opacity-75">意圖紀錄理論上可被竄改；真正不可繞過的防線是 BPF LSM。</div>
-  </div>
-  <div class="p-5 rounded-xl bg-white/5 border border-white/10" v-click>
-    <div class="font-bold text-amber-300 mb-2">概念驗證</div>
-    <div class="text-sm opacity-75">PoC 規模；常駐化與大規模效能量測是後續工程方向。</div>
-  </div>
-</div>
-
-<div class="text-center mt-7 opacity-60" v-click>能講清楚邊界，正是這套設計可信的理由。</div>
 
 ---
 layout: center
 class: text-center
 ---
 
-# 一句話總結
+# 結論
 
 <div class="text-xl leading-relaxed max-w-3xl mx-auto mt-6 opacity-95">
-我們用 <b class="text-cyan-400">eBPF</b> 守在作業系統核心，<br>
-當本機 AI 被提示詞注入、試圖偷讀機密的那一刻，<br>
-由 <b class="text-emerald-400">BPF LSM</b> 在最底層原子性地 <b class="text-red-400">回絕</b> ——<br>
-<mark>只擋這隻 AI，不影響整個系統。</mark>
+我們用 <b class="text-cyan-400">eBPF</b> 成功在 OS kernel 擋住<br>
+被提示詞注入、attempting 偷讀機密的 AI<br>
+由 <b class="text-emerald-400">BPF LSM</b> atomic <b class="text-red-400">完成</b> ——<br>
+<b class="text-red-600">只擋 AI，不影響system</b>
 </div>
 
 <div class="mt-10 text-lg opacity-80" v-click>
-看得到 <span class="opacity-40">·</span> 看得懂 <span class="opacity-40">·</span> 擋得住
+SEE <span class="opacity-40">·</span> UNDERSTAND <span class="opacity-40">·</span> BLOCK
 </div>
 
 <div class="abs-br m-8 text-sm opacity-50">謝謝聆聽 · Q & A</div>
