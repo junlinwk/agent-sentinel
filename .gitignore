@@ -5,6 +5,11 @@ __pycache__/
 .venv/
 venv/
 
+# Node / Slidev
+node_modules/
+dist/
+dist-report/
+
 # Runtime / logs (see config.yaml: runtime_dir, *_log_path)
 /tmp/agent-sentinel/
 *.jsonl

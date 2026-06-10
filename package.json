@@ -1,0 +1,14 @@
+{
+  "name": "agent-sentinel-report",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev:report": "slidev report.md --open",
+    "build:report": "slidev build report.md --base ./ --out dist-report",
+    "export:report": "slidev export report.md"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^0.49.29",
+    "@slidev/theme-seriph": "^0.25.0"
+  }
+}

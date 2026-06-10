@@ -1,0 +1,59 @@
+/* 隱藏 Slidev 的 goto（跳頁）對話框：此版本它預設半開、停在畫面右側，
+   會擋住內容。簡報用不到「輸入頁碼跳頁」就直接關掉它。 */
+#slidev-goto-dialog {
+  display: none !important;
+}
+
+/* 動畫：v-click 不要「無中生有」，改成「原本暗 → 變亮」。
+   未輪到的元素以低透明度顯示（佔位、看得見輪廓），輪到時平滑變亮。 */
+.slidev-vclick-target {
+  transition: opacity 450ms ease, filter 450ms ease !important;
+}
+
+.slidev-vclick-hidden,
+.slidev-vclick-hidden-explicit {
+  opacity: 0.18 !important;
+  filter: saturate(0.5);
+}
+
+/* 流程圖（mermaid）水平置中；垂直置中由各頁 layout: center 處理 */
+.slidev-layout .mermaid {
+  text-align: center;
+}
+
+.slidev-layout .mermaid>svg {
+  margin: 0 auto;
+  display: block;
+}
+
+/* 只針對「踩過的坑」頁：保留 center layout 的上下置中，但放大可用畫布。
+   這段放在全域 CSS，避免 report.md 內 scoped style 打不到 Slidev layout 外層。 */
+.slidev-layout.pitfalls-slide.center {
+  padding: 1.8rem 2rem;
+  line-height: 1.75;
+}
+
+.slidev-layout.pitfalls-slide.center > .my-auto {
+  width: 900px;
+  max-width: 100%;
+}
+
+.slidev-layout.pitfalls-slide h1 {
+  margin-bottom: 1.4rem;
+}
+
+.slidev-layout.pitfalls-slide .pitfalls-intro {
+  margin-bottom: 2rem;
+}
+
+.slidev-layout.pitfalls-slide .pitfalls-grid {
+  width: 100%;
+  max-width: none;
+  column-gap: 3rem !important;
+  row-gap: 2.4rem !important;
+  line-height: 1.65;
+}
+
+.slidev-layout.pitfalls-slide .pitfalls-note {
+  margin-top: 2rem;
+}
