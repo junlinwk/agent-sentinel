@@ -32,8 +32,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Move root redirect out of Slidev template path
+        run: mv index.html /tmp/agent-sentinel-pages-index.html
+
       - name: Build static report
         run: npm run build:pages
+
+      - name: Restore root redirect
+        run: mv /tmp/agent-sentinel-pages-index.html index.html
 
       - name: Disable Jekyll
         run: touch docs/.nojekyll
