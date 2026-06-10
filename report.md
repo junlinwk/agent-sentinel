@@ -28,6 +28,22 @@ layout: center
 class: text-center
 ---
 
+# 組員
+<div class="mt-10 text-xl leading-10">
+
+<div>109101015 醫學系 陳奕帆 </div>
+<div>112101015 醫學系 曾育晨 </div>
+<div>111901012 醫學系 游昕澔 </div>
+<div>112550026 資工系 林均澔 </div>
+<div>314554027 數據所 劉政勳 </div>
+
+</div>
+
+---
+layout: center
+class: text-center
+---
+
 <div class="text-sm tracking-widest opacity-50 mb-6">WHY ｜ 動機</div>
 
 # 為什麼要做這個？
@@ -147,13 +163,13 @@ layout: center
 layout: center
 ---
 
-# 我們的系統做三件事
+# Our System Do 3 Things
 
 <div class="grid grid-cols-3 gap-6 mt-6 max-w-4xl mx-auto text-center">
   <div class="p-6 rounded-xl bg-cyan-500/10 border border-cyan-500/40" v-click>
     <carbon-view class="text-4xl text-cyan-300 mb-3" />
     <div class="text-cyan-300 font-bold text-xl">SEE</div>
-    <div class="text-sm opacity-75 mt-2">kernel探針（eBPF）擷取 AI 的真實檔案 / 行程行為</div>
+    <div class="text-sm opacity-75 mt-2">kernelprobe（eBPF）擷取 AI 的真實檔案 / 行程行為</div>
   </div>
   <div class="p-6 rounded-xl bg-amber-500/10 border border-amber-500/40" v-click>
     <carbon-cognitive class="text-4xl text-amber-300 mb-3" />
@@ -178,7 +194,7 @@ layout: center
 ```mermaid {scale: 0.78}
 flowchart LR
   AG["AI 代理<br/>應用層"]:::a
-  AP["行為探針<br/>kernel eBPF"]:::k
+  AP["行為probe<br/>kernel eBPF"]:::k
   D["關聯引擎 daemon<br/>意圖 × 行為 → 判斷威脅"]:::d
   LSM["BPF LSM<br/>kernel阻斷 → -EPERM"]:::k
   AG -- "意圖紀錄" --> D
@@ -224,7 +240,7 @@ Detail：<code>openat2</code> flag藏在 <code>struct open_how</code> 裡，要�
 layout: center
 ---
 
-# UNDERSTAND ｜ Triple Association 接起語義斷層
+# UNDERSTAND ｜ Triple Association 接語義斷層
 
 ```mermaid {scale: 0.66}
 flowchart LR
@@ -246,7 +262,7 @@ flowchart LR
 layout: center
 ---
 
-# BLOCK ｜ BPF LSM 在 VFS 最底層攔一道
+# BLOCK ｜ BPF LSM 在 VFS 最底層攔住
 
 ```mermaid {scale: 0.74}
 flowchart LR
@@ -295,7 +311,7 @@ flowchart LR
 layout: center
 ---
 
-# Demo：proof log
+# Demo : proof log
 
 <div class="opacity-70 text-sm mb-4 text-left">實機跑出的log：</div>
 
@@ -322,7 +338,7 @@ layout: center
 layout: center
 ---
 
-# Demo：三個關鍵驗證
+# Demo : 三個驗證
 
 <div class="grid grid-cols-3 gap-5 mt-4">
   <div class="p-5 rounded-xl bg-emerald-500/10 border border-emerald-500/40" v-click>
@@ -350,7 +366,7 @@ class: pitfalls-slide
 
 # 特別處理的細節
 
-<div class="pitfalls-intro opacity-70 text-sm text-center">Handling silent failures is key :</div>
+<div class="pitfalls-intro opacity-80 text-m text-center">Handling silent failures is the key :</div>
 
 <div class="pitfalls-grid grid grid-cols-2 max-w-4xl mx-auto text-sm">
   <div class="flex gap-2" v-click><carbon-warning class="text-lg text-amber-300 shrink-0 mt-0.5" /><div><b>dev 編碼不一致</b>：glibc <code>2050</code> ≠ kernel <code>8388610</code>，不換算就靜默放行 → 一定要 <code>(major&lt;&lt;20)|minor</code>。</div></div>
