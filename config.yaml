@@ -1,0 +1,39 @@
+# =============================================================================
+# agent-sentinel 設定檔
+# =============================================================================
+
+# --- BPF / 阻斷 ---
+pin_dir: /sys/fs/bpf            # bpffs 掛載點（pinned map 存放處）
+bpf_dir: bpf                    # .c 探針所在目錄（相對於專案根）
+
+# 靜態預載的敏感目標（主防線；LSM 在 daemon 載入後即對代理行程樹生效）
+# 路徑會被 stat 取得 (dev, inode)；dev 會換算為核心格式後載入 sensitive_inodes。
+sensitive_paths:
+  - /etc/shadow
+  - /etc/gshadow
+  - /etc/sudoers
+  # - /root/.ssh/id_rsa          # 視環境而定，存在才會被載入
+
+enable_dynamic_enforcement: true   # 關聯引擎判威脅時，動態加入新目標到黑名單
+
+# --- 關聯引擎 ---
+correlation_window_ms: 500         # 意圖 ↔ 行為的時間鄰近窗（毫秒）
+# 觸發語意比對的關鍵詞（出現在 LLM 意圖文字中即提高威脅分數）
+intent_keywords:
+  - shadow
+  - passwd
+  - password
+  - /etc/sudoers
+  - id_rsa
+  - secret
+
+# --- 日誌（normalized JSONL）---
+runtime_dir: /tmp/agent-sentinel
+action_log_path: /tmp/agent-sentinel/actions.jsonl   # 行為+關聯輸出（daemon 寫）
+intent_log_path: /tmp/agent-sentinel/intent.jsonl    # 意圖（agent 寫，daemon 讀）
+alert_log_path:  /tmp/agent-sentinel/alerts.jsonl    # 確認威脅的關聯紀錄
+
+# --- 受測代理 ---
+ollama_model: llama3:8b
+ollama_host: http://localhost:11434
+agent_max_steps: 6                 # ReAct 迴圈上限

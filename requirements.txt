@@ -1,0 +1,4 @@
+# 使用者空間 Python 相依（在目標機以 pip 安裝）
+# 注意：BCC 不從 pip 安裝，請用 apt 的 python3-bpfcc（見 setup/00_setup_env.sh）
+ollama>=0.3.0
+PyYAML>=6.0

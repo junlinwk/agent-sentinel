@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Runtime / logs (see config.yaml: runtime_dir, *_log_path)
+/tmp/agent-sentinel/
+*.jsonl
+
+# BPF build artifacts (compiled on target at load time)
+*.o
+vmlinux.h
+
+# OS
+.DS_Store
