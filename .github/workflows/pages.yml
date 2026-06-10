@@ -38,8 +38,10 @@ jobs:
       - name: Build static report
         run: npm run build:pages
 
-      - name: Restore root redirect
-        run: mv /tmp/agent-sentinel-pages-index.html index.html
+      - name: Serve report at Pages root
+        run: |
+          cp docs/index.html index.html
+          perl -0pi -e 's#"\./assets/#"./docs/assets/#g' index.html
 
       - name: Disable Jekyll
         run: touch docs/.nojekyll
@@ -48,4 +50,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Build report site
-          file_pattern: docs
+          file_pattern: docs index.html
