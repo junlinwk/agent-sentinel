@@ -6,6 +6,7 @@ colorSchema: dark
 highlighter: shiki
 lineNumbers: false
 transition: slide-left
+routerMode: hash
 mdc: true
 fonts:
   sans: Noto Sans TC, Inter
